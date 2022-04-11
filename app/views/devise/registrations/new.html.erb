@@ -1,0 +1,62 @@
+<body class="bgimg">
+<h2>Sign up</h2>
+<div class="first1">
+  <div>
+  <img src="https://picsum.photos/200/300" height="200px" width="200px"  alt="Not Found">
+  </div>
+  <div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :avatars %><br />
+    <%= f.file_field :avatars %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, class:"textbox1" %>
+  </div>
+
+    <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, class:"textbox1" %>
+  </div>
+
+    <div class="field">
+    <%= f.label :contact %><br />
+    <%= f.text_field :contact, class:"textbox1" %>
+  </div>
+
+    <div class="field">
+    <%= f.label :dob %><br />
+    <%= f.date_field :dob, class:"textbox1" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"textbox1" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class:"textbox1" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"textbox1" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>
+</div>
+</body>

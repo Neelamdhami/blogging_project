@@ -1,0 +1,17 @@
+
+<table class="table1">
+  <% @bloggers.each do |blogger| %>
+
+  <tr class="tr1">
+    <th>Title</th>
+    <th>body</th>
+    <th>Action</th>
+  </tr>
+  <tr class="tr1">
+    <td><%= link_to blogger.title, blogger %></td>
+    <td><%= blogger.body %></td>
+    <td><%= link_to "Show", blogger %></td>
+  </tr>
+  <% end %>
+</table>
+<%= link_to "New blog", new_blogger_path %>

@@ -1,0 +1,20 @@
+<h1>Write a new Blogs</h1>
+<%= form_with model: @blogger do |form| %>
+<table class="first2">
+  <tr>
+    <th><%= form.label :title %> </th>
+    <td><%= form.text_field :title %> </td>
+  </tr>
+<br>
+</br>
+  <tr>
+    <th><%= form.label :body %><br> </th>
+    <td><%= form.rich_text_area :body %> </td>
+  </tr>
+
+  <tr>
+    <td><%= form.submit %></td>
+  </tr>
+
+</table>
+<% end %>

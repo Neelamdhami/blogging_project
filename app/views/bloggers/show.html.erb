@@ -1,0 +1,18 @@
+
+<table class="table1">
+  <tr class="tr1">
+    <th>Title</th>
+    <th>Body</th>
+    <th>Action</th>
+  </tr>
+  <tr class="tr1">
+    <td><h1><%= @blogger.title %></h1></td>
+    <td><p><%= @blogger.body %></p></td>
+    <td><%= link_to "Edit", edit_blogger_path(@blogger) %>|
+    <%= link_to "Destroy", blogger_path(@blogger), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li> </td>
+  </tr>
+  
+</table>
