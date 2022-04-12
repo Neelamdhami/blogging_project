@@ -1,18 +1,84 @@
+<%= social_share_button_tag(@blogger.title) %>
 
-<table class="table1">
-  <tr class="tr1">
-    <th>Title</th>
-    <th>Body</th>
-    <th>Action</th>
-  </tr>
-  <tr class="tr1">
-    <td><h1><%= @blogger.title %></h1></td>
-    <td><p><%= @blogger.body %></p></td>
-    <td><%= link_to "Edit", edit_blogger_path(@blogger) %>|
-    <%= link_to "Destroy", blogger_path(@blogger), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li> </td>
-  </tr>
-  
-</table>
+<p><%= @blogger.likes.count %> <%= (@blogger.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+<% pre_like = @blogger.likes.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', blogger_like_path(@blogger, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', blogger_likes_path(@blogger), method: :post %>
+<% end %>
+
+<h3>comment</h3>
+  <% @blogger.comments.each do |comment| %>
+  <div class="well">
+    <%= comment.body %>
+      <p>
+  <%= link_to "Destroy Comment", "#" %>
+</p>
+  </div>
+  <%end%>
+
+
+  <%= form_with model: [ @blogger, @blogger.comments.build ] do |form| %>
+  <p>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+
+<body>
+  <div class="wrapper">
+    <%= image_tag @blogger.blog_image.url, class: 'blog-show-image' %>
+    <h1><%= @blogger.title %></h1>
+    <section>
+      <p><%= @blogger.body %></p>
+    </section>
+  </div>
+</body>
+
+
+
+<style type="text/css">
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat|Rubik+Mono+One');
+  body{
+    font-family: 'Rubik Mono One', sans-serif; 
+    font-family: 'Roboto Slab', serif;
+    background-color: #fffff;
+    color: #363636;
+  }
+  .wrapper{
+    padding: 0 0 0 0;
+    padding: 0 12% 0 12%;
+    display:inline-block;
+  }
+  .blog-show-image{
+    width: 1000px;
+    height: 500px;
+    margin-top: 10px;
+    border: 10px solid #000;
+  }
+  h1{
+    font-size: 70px;
+    text-align: center;
+  }
+  .title{
+  padding-top: 2rem;
+  color:#4C74C9;
+    font-size: var(--s2);
+  }
+  .nav h2{
+    padding-left: 7%;
+    font-size: var(--s1);
+  }
+  p{
+  line-height: 2rem;
+  }
+  span{
+    color:#00a1e1;
+  }
+</style>

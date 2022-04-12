@@ -5,25 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-      <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <% if signed_in? %>
-        <%= link_to current_user.email, edit_user_registration_path %>
-        <%= link_to "New blog", new_blogger_path %>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: "false" } %>
-      <% else %>
-        <%= link_to "Log in", new_user_session_path %>
-        <%= link_to "Register", new_user_registration_path %>
-        
-      <% end %>
-    </div>
-    
+    <%= render 'layouts/shared/header' %>
     <%= yield %>
   </body>
 </html>

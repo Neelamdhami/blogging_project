@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_105335) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_12_070247) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -54,6 +54,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_105335) do
     t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "blog_image"
+    t.index ["user_id"], name: "index_bloggers_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "blogger_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blogger_id"], name: "index_likes_on_blogger_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,4 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_105335) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "likes", "bloggers"
+  add_foreign_key "likes", "users"
 end

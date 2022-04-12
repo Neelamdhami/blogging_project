@@ -1,20 +1,22 @@
-<h1>Write a new Blogs</h1>
+<h1>Write a new blog</h1>
 <%= form_with model: @blogger do |form| %>
-<table class="first2">
-  <tr>
-    <th><%= form.label :title %> </th>
-    <td><%= form.text_field :title %> </td>
-  </tr>
-<br>
-</br>
-  <tr>
-    <th><%= form.label :body %><br> </th>
-    <td><%= form.rich_text_area :body %> </td>
-  </tr>
-
-  <tr>
-    <td><%= form.submit %></td>
-  </tr>
-
-</table>
+  <table class="first2">
+    <tr>
+      <th><%= form.label :title %> </th>
+      <td><%= form.text_field :title %> </td>
+    </tr>
+  </br>
+  </br>
+    <tr>
+      <th><%= form.label :body %><br> </th>
+      <td><%= form.rich_text_area :body %> </td>
+    </tr>
+    <tr>
+      <th><%= form.label :image %><br> </th>
+      <td><%= form.file_field :blog_image %></td>
+    </tr>
+    <tr>
+      <td><%= form.submit %></td>
+    </tr>
+  </table>
 <% end %>

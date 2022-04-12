@@ -1,0 +1,31 @@
+<div class="row">
+  <% @blogs.each do |blog| %>
+  	<div class="col-12 col-sm-6 col-md-4 image-grid-item">
+  		<div style="background-image: url(<%= blog.blog_image.url %>);" class="entry-cover image-grid-cover has-image">
+  			<a href="<%= blogger_path(blog) %>" class="image-grid-clickbox"></a>
+        <a href="<%= blogger_path(blog) %>" class="cover-wrapper"><%= blog.title %></a>
+        <% if blog_owner(blog) %>
+          <%= link_to "<i class='fa fa-trash'></i>".html_safe, blogger_path(blog), class: "cover-wrapper trash", title: 'Delete',
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure?"
+            }
+          %>
+          <%= link_to "<i class='fa fa-pencil'></i>".html_safe, edit_blogger_path(blog), class: "cover-wrapper edit", title: 'Edit' %>
+        <%end%>
+  		</div>
+  	</div>
+  <% end %>
+</div>
+<style type="text/css">
+  a.cover-wrapper.trash {
+    top: 126px;
+    float: left;
+    left: 5px;
+  }
+  a.cover-wrapper.edit {
+    top: 125px;
+    float: right;
+    right: 5px;
+  }
+</style>

@@ -1,0 +1,131 @@
+<div class="nav_bar">
+  <input type="checkbox" id="nav_bar-check">
+  <div class="nav_bar-header">
+    <div class="nav_bar-title">
+      <a class="active" href="/">Blogger</a>
+    </div>
+  </div>
+  <div class="nav_bar-btn">
+    <label for="nav_bar-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+  
+  <div class="nav_bar-links">
+    <% if signed_in? %>
+      <%= link_to current_user.email, edit_user_registration_path %>
+      <%= link_to "New Blog", new_blogger_path %>
+      <%= link_to "Blogs", bloggers_path %>
+      <%= link_to "Logout", destroy_user_session_path,
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        } 
+      %>
+    <% else %>
+      <%= link_to "Log in", new_user_session_path %>
+      <%= link_to "Register", new_user_registration_path %> 
+    <% end %>
+  </div>
+</div>
+<style type="text/css">
+  * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  font-family: 'segoe ui';
+}
+
+.nav_bar {
+  height: 50px;
+  width: 100%;
+  background-color: #4d4d4d;
+  position: relative;
+}
+
+.nav_bar > .nav_bar-header {
+  display: inline;
+}
+
+.nav_bar > .nav_bar-header > .nav_bar-title {
+  display: inline-block;
+  font-size: 22px;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
+}
+
+.nav_bar > .nav_bar-btn {
+  display: none;
+}
+
+.nav_bar > .nav_bar-links {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+.nav_bar > .nav_bar-links > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #efefef;
+}
+
+.nav_bar > .nav_bar-links > a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav_bar > #nav_bar-check {
+  display: none;
+}
+
+@media (max-width:600px) {
+  .nav_bar > .nav_bar-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .nav_bar > .nav_bar-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav_bar > .nav_bar-btn > label:hover,.nav_bar  #nav_bar-check:checked ~ .nav_bar-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav_bar > .nav_bar-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav_bar > .nav_bar-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  .nav_bar > .nav_bar-links > a {
+    display: block;
+    width: 100%;
+  }
+  .nav_bar > #nav_bar-check:not(:checked) ~ .nav_bar-links {
+    height: 0px;
+  }
+  .nav_bar > #nav_bar-check:checked ~ .nav_bar-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+}
+</style>
